@@ -10,10 +10,20 @@ employees = [ { 'id': 1, 'name': 'Ashley' }, { 'id': 2, 'name': 'Kate' }, { 'id'
 
 @app.route('/', methods=['GET'])
 def get_employees():
- with open("analyzer-v1.3.py", 'r') as f:
+   header = []
+   rows = []
+
+   with open("analyzer_v1.3.py", 'r') as f:
       source_code = f.read()
       exec(source_code)
- return jsonify(employees)
+
+      with open('anlyzer_results.csv', newline='') as csvfile:
+         csvreader = csv.reader(csvfile, delimiter=';')
+         header = next(csvreader)
+         for row in csvreader:
+            rows.append(row)
+
+   return jsonify(header, rows)
 
 if __name__ == '__main__':
    app.run(debug=True, port=5000)

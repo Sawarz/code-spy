@@ -34,7 +34,7 @@ def parse_magic_comments(source_code):
             exec(code)
 
 
-with open('anlyzer_results.csv', 'w', newline='') as csvfile:
+with open('analyzer_results.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile, delimiter=';')
     writer.writerow(['SegmentName:','SegmentCategory:','ExecutionTime:','TimeStamp:'])
 
