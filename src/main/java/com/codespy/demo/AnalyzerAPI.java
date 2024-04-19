@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/mati")
 public class AnalyzerAPI {
 
     @GetMapping
     public String getAnalyze()
     {
-        return "TEST TOMEK";
+        return "Siema Mati";
     }
 }
