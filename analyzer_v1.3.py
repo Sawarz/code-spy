@@ -1,3 +1,7 @@
+import time
+import csv
+import re
+
 def parse_magic_comments(source_code):
     # Define the pattern for magic comments
     pattern = r'#\s*ANALYZER:(.*)'
@@ -28,7 +32,7 @@ def parse_magic_comments(source_code):
 
         if instruction == 'end':
             code = source_code.split(f"# ANALYZER: start -> {analyzedBlockCategory} : {analyzedBlockName}\n")[1].split(f"\n# ANALYZER: end -> {analyzedBlockCategory} : {analyzedBlockName}")[0]
-            code = "start_time = time.time()\n" + code + "\nend_time = time.time()\nround_elapsed = round(end_time - start_time,round_dec)\ntimestamp=round(end_time - begin_time,round_dec)\nprint(f'[ANALYZER] {analyzedBlockCategory}/{analyzedBlockName}: {round_elapsed} seconds, at {timestamp} seconds timestamp')\nwith open('anlyzer_results.csv', 'a', newline='') as csvfile:\n\twriter = csv.writer(csvfile, delimiter=';')\n\twriter.writerow([analyzedBlockName,analyzedBlockCategory,round_elapsed,timestamp])"
+            code = "start_time = time.time()\n" + code + "\nend_time = time.time()\nround_elapsed = round(end_time - start_time,round_dec)\ntimestamp=round(end_time - begin_time,round_dec)\nprint(f'[ANALYZER] {analyzedBlockCategory}/{analyzedBlockName}: {round_elapsed} seconds, at {timestamp} seconds timestamp')\nwith open('analyzer_results.csv', 'a', newline='') as csvfile:\n\twriter = csv.writer(csvfile, delimiter=';')\n\twriter.writerow([analyzedBlockName,analyzedBlockCategory,round_elapsed,timestamp])"
 
             # Execute the code
             exec(code)
